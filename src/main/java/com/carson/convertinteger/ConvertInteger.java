@@ -25,7 +25,7 @@ public class ConvertInteger {
 		}
 		Integer[] intArray = new Integer[args.length];
 		for (int i=0;i<args.length;i++) {
-			intArray[i] = Integer.valueOf(args[i]);
+			intArray[i] = Integer.valueOf(args[i]); 
 		}
 		List<String> listStr = convert(intArray);
 		listStr.forEach(str->{
@@ -34,9 +34,23 @@ public class ConvertInteger {
 	}
 	
 	public static List<String> convert(Integer[] intArray) {
+		List<Integer> integerList = new ArrayList<>();
+		for (int i=0;i<intArray.length;i++) {
+			Integer digit = intArray[i];
+			if(digit<0||digit>99) {
+				throw new RuntimeException("digit not betwee 0-99");
+			} else {
+				if(digit/10!=0) {
+					integerList.add(digit/10);
+				}
+				if(digit%10!=0) {
+					integerList.add(digit%10);
+				}
+			}
+		}
 		List<String> listStr = new ArrayList<>();
-		for(int i=0;i<intArray.length;i++) {
-			listStr = addLetter(listStr, intArray[i]);
+		for (Integer digit : integerList) {
+			listStr = addLetter(listStr, digit);
 		}
 		return listStr;
 	}
